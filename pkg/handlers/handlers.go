@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"GO/trevor/bookings-31/pkg/config"
-	"GO/trevor/bookings-31/pkg/models"
-	"GO/trevor/bookings-31/pkg/render"
+	"GO/trevor/bookings_prj/pkg/config"
+	"GO/trevor/bookings_prj/pkg/models"
+	"GO/trevor/bookings_prj/pkg/render"
 
 	// _ "cycle"
 	"net/http"

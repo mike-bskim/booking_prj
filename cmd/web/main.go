@@ -1,9 +1,12 @@
 package main
 
 import (
-	"GO/trevor/bookings-31/pkg/config"
-	"GO/trevor/bookings-31/pkg/handlers"
-	"GO/trevor/bookings-31/pkg/render"
+	// "GO/trevor/bookings-31/pkg/config"
+	// "GO/trevor/bookings-31/pkg/handlers"
+	// "GO/trevor/bookings-31/pkg/render"
+	"GO/trevor/bookings_prj/pkg/config"
+	"GO/trevor/bookings_prj/pkg/handlers"
+	"GO/trevor/bookings_prj/pkg/render"
 	"fmt"
 	"log"
 	"net/http"

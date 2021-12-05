@@ -1,8 +1,8 @@
 package render
 
 import (
-	"GO/trevor/bookings-31/pkg/config"
-	"GO/trevor/bookings-31/pkg/models"
+	"GO/trevor/bookings_prj/pkg/config"
+	"GO/trevor/bookings_prj/pkg/models"
 	"bytes"
 	"fmt"
 	"html/template"
