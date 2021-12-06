@@ -39,7 +39,7 @@
 <div class="collapse navbar-collapse" id="navbarNav">
 <ul class="navbar-nav">
   <li class="nav-item active">
-    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="about.html">About</a>
@@ -69,25 +69,31 @@
 
     <div class="row">
         <div class="col">
-            <h1 class="mt-5">Search for Availability</h1>
+            <h1>Make reservation</h1>
 
-            <form action="reservation.html" method="GET">
-
-              <p >
-                <div class="mb-3">
-                  <label for="start_date" class="form-label">Starting Date</label>
-                  <input type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startDateHelp" style="max-width: 50%;">
-                  <div id="startDateHelp" class="form-text" text-muted>Enter your starting date in the form of YYYY-MM-DD.</div>
+            <form action="" method="post" class="needs-validation" novalidate>
+                <div class="form-group mt-5">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off" style="max-width: 50%;">
                 </div>
 
-                <div class="mb-3">
-                  <label for="end_date" class="form-label">Ending Date</label>
-                  <input type="date" class="form-control" id="end_date" name="end_date" aria-describedby="EndDateHelp" style="max-width: 50%;">
-                  <div id="EndDateHelp" class="form-text" text-muted>Enter your starting date in the form of YYYY-MM-DD.</div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off" style="max-width: 50%;">
                 </div>
-              </p>
 
-              <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" required autocomplete="off" style="max-width: 50%;">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone number:</label>
+                    <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off" style="max-width: 50%;">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Make Reservation">
+
             </form>
 
         </div>
