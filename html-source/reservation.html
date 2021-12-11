@@ -169,7 +169,8 @@
 
 
 <script>
-  console.log("I am printing from javascript");
+  // console.log("I am printing from javascript");
+  let attention = Prompt();
 
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function() {
@@ -191,22 +192,11 @@
   })();
 
   document.getElementById("colorButton").addEventListener("click", function() {
-    // let myEl = document.getElementById("myParagraph");
-    // if (myEl.classList.contains("redText")) {
-    //   myEl.classList.remove("redText");
-    // } else {
-    //   myEl.classList.add("redText");
-    // }
-    // console.log(myEl.classList);
-
-  // 1: options.classes.backgroundSuccess,
-  // 2: options.classes.backgroundWarning,
-  // 3: options.classes.backgroundError,
-  // 4: options.classes.backgroundInfo,
-  // 5: options.classes.backgroundNeutral,    
     // enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
     // notify("success", "This is my message")
-    notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
+    // notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
+    // attention.toast({msg:"Hello, World", icon:"error",});
+    attention.error({msg:"Hello, World"});
   })
 
   const elem = document.getElementById('reservation-dates');
@@ -231,6 +221,68 @@
       icon: icon,
       confirmButtonText: confirmButtonText
     })
+  }
+
+  function Prompt() {
+    let toast = function(c) {
+      const {
+        msg = "",
+        icon = "success",
+        position = "top-end",
+      } = c;
+
+      const Toast = Swal.mixin({
+        toast: true,
+        title: msg,
+        position: position,
+        icon: icon,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({})      
+    }
+
+    let success = function(c) {
+      const {
+        msg = "",
+        title = "",
+        footer = "",
+      } = c;
+
+      Swal.fire({
+        icon: 'success',
+        title: title,
+        text: msg,
+        footer: footer,
+      })
+    }
+
+    let error = function(c) {
+      const {
+        msg = "",
+        title = "",
+        footer = "",
+      } = c;
+
+      Swal.fire({
+        icon: 'error',
+        title: title,
+        text: msg,
+        footer: footer,
+      })
+    }
+
+    return {
+      toast: toast,
+      success: success,
+      error: error,
+    }
   }
 
 </script>
