@@ -39,6 +39,9 @@
           /* background-color: #57BF57; */
           /* notie-color-success: #57BF57; */
         }
+        .datepicker {
+          z-index: 10000;
+        }
     </style>
 </head>
 
@@ -196,7 +199,25 @@
     // notify("success", "This is my message")
     // notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
     // attention.toast({msg:"Hello, World", icon:"error",});
-    attention.error({msg:"Hello, World"});
+    // attention.error({msg:"Hello, World"});
+    let html = `
+      <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
+        <div class="form-row">
+          <div class="col">
+            <div class="form-row" id="reservation-dates-modal">
+              <div class="col">
+                <input disabled required class="form-control" type="text" name="start" id ="start" placeholder="Arrival">
+              </div>
+              <div class="col">
+                <input disabled required class="form-control" type="text" name="end" id ="end" placeholder="Departure">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    `
+    attention.custom({msg:html, title:"Choose your dates"});
+
   })
 
   const elem = document.getElementById('reservation-dates');
@@ -278,10 +299,48 @@
       })
     }
 
+    async function custom(c) {
+      const {
+        msg = "",
+        title = "",
+      } = c;
+
+      const { value: formValues } = await Swal.fire({
+        title: title,
+        html: msg,
+        backdrop: false,
+        focusConfirm: false,
+        showCancelButton: true,
+        willOpen: () => { //datepicker 기능 추가
+          const elem = document.getElementById('reservation-dates-modal');
+          const rangepicker = new DateRangePicker(elem, {
+            format: "yyyy-mm-dd",
+            showOnFocus: true,
+          });
+        },
+        preConfirm: () => {
+          return [
+            document.getElementById('start').value,
+            document.getElementById('end').value
+          ]
+        },
+        didOpen: () => { // datepicker 모달창이 보일때 달력 나오지 않게 처리후 입력가능하게 다시 변경
+          document.getElementById("start").removeAttribute("disabled");
+          document.getElementById("end").removeAttribute("disabled");
+        },
+      })
+
+      if (formValues) {
+        Swal.fire(JSON.stringify(formValues))
+      }
+
+    }
+
     return {
       toast: toast,
       success: success,
       error: error,
+      custom: custom,
     }
   }
 
