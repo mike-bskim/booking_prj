@@ -9,6 +9,8 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/justinas/nosurf"
 )
 
 var functions = template.FuncMap{}
@@ -20,12 +22,15 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	// <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+	// 아래 부분이 html 에서 불러오는 이름("{{.CSRFToken}}")과 같아야 함.
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate renders a template
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -39,16 +44,22 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	// map에 원하는 페이지가 있는지 확인
 	t, ok := tc[tmpl]
 	if !ok {
+		// return errors.New("Could not get template from template cache")
 		log.Fatal("Could not get template from template cache")
 	}
 
 	buf := new(bytes.Buffer) // buf 생성
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 
-	_ = t.Execute(buf, td)   // 해당 페이지를 buf 에 저장
+	_ = t.Execute(buf, td) // 해당 페이지를 buf 에 저장
+	// if err != nil {
+	// 	return err
+	// }
 	_, err := buf.WriteTo(w) // client 에게 전송
 	if err != nil {
+		// log.Println(err)
 		fmt.Println("error writing template to browser", err)
+		// return err
 	}
 
 }
