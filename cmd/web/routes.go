@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GO/trevor/bookings_prj/pkg/config"
-	"GO/trevor/bookings_prj/pkg/handlers"
+	"GO/trevor/bookings_prj/internal/config"
+	"GO/trevor/bookings_prj/internal/handlers"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"

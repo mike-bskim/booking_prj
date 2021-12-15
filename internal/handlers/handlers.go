@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"GO/trevor/bookings_prj/pkg/config"
-	"GO/trevor/bookings_prj/pkg/models"
-	"GO/trevor/bookings_prj/pkg/render"
+	"GO/trevor/bookings_prj/internal/config"
+	"GO/trevor/bookings_prj/internal/models"
+	"GO/trevor/bookings_prj/internal/render"
 	"encoding/json"
 	"fmt"
 	"log"
