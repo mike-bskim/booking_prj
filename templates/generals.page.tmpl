@@ -44,29 +44,63 @@
         console.log("General Page")
 
         document.getElementById("check-availability-button").addEventListener("click", function() {
-        // enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-        // notify("success", "This is my message")
-        // notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
-        // attention.toast({msg:"Hello, World", icon:"error",});
-        // attention.error({msg:"Hello, World"});
-        let html = `
-            <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
-            <div class="form-row">
-                <div class="col">
-                <div class="form-row" id="reservation-dates-modal">
+            // enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+            // notify("success", "This is my message")
+            // notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
+            // attention.toast({msg:"Hello, World", icon:"error",});
+            // attention.error({msg:"Hello, World"});
+            let html = `
+                <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
+                <div class="form-row">
                     <div class="col">
-                    <input disabled required class="form-control" type="text" name="start" id ="start" placeholder="Arrival">
+                    <div class="form-row" id="reservation-dates-modal">
+                        <div class="col">
+                        <input disabled required class="form-control" type="text" name="start" id ="start" placeholder="Arrival">
+                        </div>
+                        <div class="col">
+                        <input disabled required class="form-control" type="text" name="end" id ="end" placeholder="Departure">
+                        </div>
                     </div>
-                    <div class="col">
-                    <input disabled required class="form-control" type="text" name="end" id ="end" placeholder="Departure">
                     </div>
                 </div>
-                </div>
-            </div>
-            </form>
-        `
-        attention.custom({msg:html, title:"Choose your dates"});
-    
+                </form>
+            `
+            attention.custom({
+                msg: html, 
+                title: "Choose your dates",
+                willOpen: () => { //datepicker 기능 추가
+                    const elem = document.getElementById('reservation-dates-modal');
+                    const rangepicker = new DateRangePicker(elem, {
+                    format: "yyyy-mm-dd",
+                    showOnFocus: true,
+                    });
+                },
+
+                didOpen: () => { // datepicker 모달창이 보일때 달력 나오지 않게 처리후 입력가능하게 다시 변경
+                    document.getElementById("start").removeAttribute("disabled");
+                    document.getElementById("end").removeAttribute("disabled");
+                },
+
+                callback: function(result){
+                    console.log("called >>> ", result)
+
+                    let form = document.getElementById("check-availability-form")
+                    let formData = new FormData(form)
+                    formData.append("csrf_token", "{{.CSRFToken}}")
+
+                    fetch("/search-availability-json", {
+                        method: "post",
+                        body: formData,
+                    }) // Get --> Post 형식으로 변경함
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            console.log(data.ok);
+                            console.log(data.message);
+                        })
+                }
+            });
+        
         })        
     </script>
 {{end}}
