@@ -115,37 +115,6 @@
       }, false);
     })();
   
-    // document.getElementById("colorButton").addEventListener("click", function() {
-    //   // enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-    //   // notify("success", "This is my message")
-    //   // notifyModal("title", "<em>Hellow, World</em>", "error", "Cool")
-    //   // attention.toast({msg:"Hello, World", icon:"error",});
-    //   // attention.error({msg:"Hello, World"});
-    //   let html = `
-    //     <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
-    //       <div class="form-row">
-    //         <div class="col">
-    //           <div class="form-row" id="reservation-dates-modal">
-    //             <div class="col">
-    //               <input disabled required class="form-control" type="text" name="start" id ="start" placeholder="Arrival">
-    //             </div>
-    //             <div class="col">
-    //               <input disabled required class="form-control" type="text" name="end" id ="end" placeholder="Departure">
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </form>
-    //   `
-    //   attention.custom({msg:html, title:"Choose your dates"});
-  
-    // })
-  
-    // const elem = document.getElementById('reservation-dates');
-    // const rangepicker = new DateRangePicker(elem, {
-    //   format: "yyyy-mm-dd",
-    // });
-  
     function notify(msgType, msg) {
       notie.alert({
       type: msgType, //Number|String, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
@@ -165,6 +134,18 @@
       })
     }
   
+    {{with .Error}}
+      notify("error", "{{.}}")
+    {{end}}
+
+    {{with .Flash}}
+      notify("success", "{{.}}")
+    {{end}}
+
+    {{with .Warning}}
+      notify("warning", "{{.}}")
+    {{end}}
+
     function Prompt() {
       let toast = function(c) {
         const {

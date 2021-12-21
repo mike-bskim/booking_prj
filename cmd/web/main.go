@@ -6,7 +6,9 @@ import (
 	// "GO/trevor/bookings_prj/pkg/render"
 	"GO/trevor/bookings_prj/internal/config"
 	"GO/trevor/bookings_prj/internal/handlers"
+	"GO/trevor/bookings_prj/internal/models"
 	"GO/trevor/bookings_prj/internal/render"
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -22,6 +24,9 @@ var session *scs.SessionManager
 
 // main is the main function
 func main() {
+
+	// what am I doing to put in the session
+	gob.Register(models.Reservation{})
 
 	// change this to true wehn in production
 	app.InProduction = false

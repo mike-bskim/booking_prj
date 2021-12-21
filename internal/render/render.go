@@ -22,10 +22,14 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+// AddDefaultData adds data for all templates
 func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
 	// <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
 	// 아래 부분이 html 에서 불러오는 이름("{{.CSRFToken}}")과 같아야 함.
 	td.CSRFToken = nosurf.Token(r)
+	td.Flash = app.Session.PopString(r.Context(), "flash")
+	td.Error = app.Session.PopString(r.Context(), "error")
+	td.Warning = app.Session.PopString(r.Context(), "warning")
 	return td
 }
 
