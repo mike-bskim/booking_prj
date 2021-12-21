@@ -1,0 +1,12 @@
+mode: set
+GO/trevor/bookings_prj/cmd/web/main.go:26.13,29.16 2 0
+GO/trevor/bookings_prj/cmd/web/main.go:33.2,42.16 5 0
+GO/trevor/bookings_prj/cmd/web/main.go:29.16,31.3 1 0
+GO/trevor/bookings_prj/cmd/web/main.go:45.18,61.16 10 1
+GO/trevor/bookings_prj/cmd/web/main.go:66.2,73.12 6 1
+GO/trevor/bookings_prj/cmd/web/main.go:61.16,64.3 2 0
+GO/trevor/bookings_prj/cmd/web/middleware.go:11.53,12.71 1 0
+GO/trevor/bookings_prj/cmd/web/middleware.go:12.71,15.3 2 0
+GO/trevor/bookings_prj/cmd/web/middleware.go:19.45,31.2 4 1
+GO/trevor/bookings_prj/cmd/web/middleware.go:34.50,37.2 2 1
+GO/trevor/bookings_prj/cmd/web/routes.go:12.49,39.2 18 1

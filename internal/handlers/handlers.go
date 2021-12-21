@@ -130,7 +130,7 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	start := r.Form.Get("start_date")
 	end := r.Form.Get("end_date")
-	fmt.Println(">>>", start, end)
+	fmt.Printf("handlers.go >>> PostAvailability [%s][%s]\n", start, end)
 
 	w.Write([]byte(fmt.Sprintf("start date is %s and end date is %s", start, end)))
 }
@@ -151,8 +151,6 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-
-	log.Println(string(out))
 
 	// header type,
 	w.Header().Set("Content-Type", "application/json")
