@@ -1,3 +1,5 @@
 .idea
+*.out
+*.exe
 /bookings-udemy*
 /bookings_prj
